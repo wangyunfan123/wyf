@@ -67,6 +67,9 @@ public class myFrame extends JFrame {
     public Component initBut() {
 
         //Create and assemble the components
+        //在方法内部，首先创建了一个JPanel对象panel，并设置了流式布局。
+        // 然后创建了三个文本框field1、field2和field3，两个标签input1和input2，以及一个按钮button。
+        // 这些组件被添加到面板中，并使用了流式布局使它们水平排列。
         JPanel panel = new JPanel(new FlowLayout());
         JTextField field1 = new JTextField(10);
         field1.setText("");
@@ -85,11 +88,15 @@ public class myFrame extends JFrame {
         panel.add(button);
 
         //Restrict the user to enter only numbers
+        //接下来，对文本框进行了限制，只允许用户输入数字。这是通过将每个文本框的文档设置为NumberTextField来实现的，可能是一个自定义的类。
         field1.setDocument(new NumberTextField());
         field2.setDocument(new NumberTextField());
         field3.setDocument(new NumberTextField());
 
         //Button action listener
+        //然后，对按钮添加了动作监听器。当按钮被点击时，将执行监听器中的actionPerformed方法。
+        // 在这个方法中，首先检查用户是否已经在所有文本框中输入了内容。如果是，那么获取用户输入的数字，并与预先设置的答案进行比较。
+        // 如果答案正确，文本框被清空，并且顶部、左侧和右侧的组件也被重新设置。如果答案不正确，只会重新设置顶部的组件。
         button.addActionListener(new ActionListener(){
 
             @Override
@@ -139,6 +146,7 @@ public class myFrame extends JFrame {
                 setVisible(true);
             }
         });
+        //最后，将面板返回作为方法的结果。
         return panel;
     }
 
@@ -146,11 +154,17 @@ public class myFrame extends JFrame {
     public Component initImageL() {
 
         //Get random number
+        //在方法内部，首先创建了一个Random对象random，用于生成随机数。
+        // 然后使用nextInt(10) + 1生成一个介于1和10之间的随机数，并将其保存在变量r中，然后通过调用setR1(r)方法将其设置为类中的属性。
         Random random = new Random();
         int r = random.nextInt(10) + 1;
         setR1(r);
 
         //Place patterns so that there are up to 3 patterns per row
+        //接着，创建了一个JPanel对象panel，并设置了网格布局，
+        // 网格的行数设置为0，列数设置为3，这样可以让面板根据添加的组件动态调整行数，每行最多放置3个组件。
+        //然后使用for循环向面板中添加图像标签。循环从0开始，直到达到随机生成的数r为止。
+        // 在每次循环中，创建一个JLabel对象rabbit，将一个名为"rabbit.jpg"的图像作为标签的内容，并将其添加到面板中。
         int num = 0;
         JPanel panel = new JPanel(new GridLayout(0, 3));
         for (num = 0; num < r; num++) {
