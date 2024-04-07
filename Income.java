@@ -3,6 +3,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// 新建一个类来保存总金额
+class Account {
+    static double totalAmount = 0; // 静态变量，所有实例共享
+}
+
 public class Income extends JFrame {
     private JPanel incomePanel;
     private JPanel expensePanel;
@@ -89,10 +94,14 @@ public class Income extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String depositAmount = depositTextField.getText();
                 // 在此处添加保存存款金额的逻辑
-                System.out.println("收入确认: 存款金额为 " + depositAmount);
+                double deposit = Double.parseDouble(depositAmount);
+                Account.totalAmount += deposit; // 更新总金额
+                JOptionPane.showMessageDialog(null, "您本次存款" + depositAmount + "元，收入来源是做家务，账户总金额为" + Account.totalAmount + "元");
             }
         });
-    }    private void createExpensePanel() {
+    }
+
+    private void createExpensePanel() {
         expensePanel = new JPanel(new GridLayout(3, 1));
         // 添加文本和输入框到支出面板
         JLabel withdrawalLabel = new JLabel("提款:");
@@ -111,8 +120,13 @@ public class Income extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String withdrawalAmount = withdrawalTextField.getText();
-                // 在此处添加提款的逻辑
-                System.out.println("支出确认: 提款金额为 " + withdrawalAmount);
+                double withdrawal = Double.parseDouble(withdrawalAmount);
+                if (withdrawal > Account.totalAmount) {
+                    JOptionPane.showMessageDialog(null, "账户余额不足，无法完成提款！");
+                } else {
+                    Account.totalAmount -= withdrawal; // 更新总金额
+                    JOptionPane.showMessageDialog(null, "您已取款" + withdrawalAmount + "元，账户总金额为" + Account.totalAmount + "元");
+                }
             }
         });
     }
