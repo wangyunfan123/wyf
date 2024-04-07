@@ -50,27 +50,38 @@ public class Income extends JFrame {
     }
 
     private void createIncomePanel() {
-        incomePanel = new JPanel(new GridLayout(4, 3));
+        incomePanel = new JPanel(new GridLayout(3, 1)); // 更改为GridLayout，3行1列
+
+        // 创建按钮面板，使得"做家务", "进步", "其他"按钮在同一行
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         // 添加按钮
         JButton houseworkButton = new JButton("做家务");
         JButton progressButton = new JButton("进步");
         JButton otherButton = new JButton("其他");
-        // 添加按钮到收入面板
-        incomePanel.add(houseworkButton);
-        incomePanel.add(progressButton);
-        incomePanel.add(otherButton);
+        // 添加按钮到按钮面板
+        buttonPanel.add(houseworkButton);
+        buttonPanel.add(progressButton);
+        buttonPanel.add(otherButton);
+        // 将按钮面板添加到收入面板
+        incomePanel.add(buttonPanel);
 
-        // 添加文本和输入框到收入面板
+        // 创建存款面板，存款单独一行
+        JPanel depositPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        // 添加文本和输入框到存款面板
         JLabel depositLabel = new JLabel("存款:");
         JTextField depositTextField = new JTextField(10);
-        JPanel depositPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         depositPanel.add(depositLabel);
         depositPanel.add(depositTextField);
+        // 将存款面板添加到收入面板
         incomePanel.add(depositPanel);
 
-        // 添加确认按钮到收入面板
+        // 创建确认按钮面板，确认按钮单独一行
+        JPanel confirmPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        // 添加确认按钮到确认按钮面板
         JButton confirmIncomeButton = new JButton("确认");
-        incomePanel.add(confirmIncomeButton);
+        confirmPanel.add(confirmIncomeButton);
+        // 将确认按钮面板添加到收入面板
+        incomePanel.add(confirmPanel);
 
         // 添加确认按钮点击事件
         confirmIncomeButton.addActionListener(new ActionListener() {
@@ -81,9 +92,7 @@ public class Income extends JFrame {
                 System.out.println("收入确认: 存款金额为 " + depositAmount);
             }
         });
-    }
-
-    private void createExpensePanel() {
+    }    private void createExpensePanel() {
         expensePanel = new JPanel(new GridLayout(3, 1));
         // 添加文本和输入框到支出面板
         JLabel withdrawalLabel = new JLabel("提款:");
