@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -80,25 +81,45 @@ public class Income extends JFrame {
         // 将存款面板添加到收入面板
         incomePanel.add(depositPanel);
 
-        // 创建确认按钮面板，确认按钮单独一行
-        JPanel confirmPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        // 添加确认按钮到确认按钮面板
-        JButton confirmIncomeButton = new JButton("确认");
-        confirmPanel.add(confirmIncomeButton);
-        // 将确认按钮面板添加到收入面板
-        incomePanel.add(confirmPanel);
 
-        // 添加确认按钮点击事件
-        confirmIncomeButton.addActionListener(new ActionListener() {
+
+        // 添加做家务按钮点击事件
+        houseworkButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String depositAmount = depositTextField.getText();
-                // 在此处添加保存存款金额的逻辑
                 double deposit = Double.parseDouble(depositAmount);
+                String incomeSource = "做家务"; // 收入来源为做家务
                 Account.totalAmount += deposit; // 更新总金额
-                JOptionPane.showMessageDialog(null, "您本次存款" + depositAmount + "元，收入来源是做家务，账户总金额为" + Account.totalAmount + "元");
+                JOptionPane.showMessageDialog(null, "您本次存款" + depositAmount + "元，收入来源是" + incomeSource + "，账户总金额为" + Account.totalAmount + "元");
             }
         });
+
+        // 添加进步按钮点击事件
+        progressButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String depositAmount = depositTextField.getText();
+                double deposit = Double.parseDouble(depositAmount);
+                String incomeSource = "进步"; // 收入来源为进步
+                Account.totalAmount += deposit; // 更新总金额
+                JOptionPane.showMessageDialog(null, "您本次存款" + depositAmount + "元，收入来源是" + incomeSource + "，账户总金额为" + Account.totalAmount + "元");
+            }
+        });
+
+        // 添加其他按钮点击事件
+        otherButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String depositAmount = depositTextField.getText();
+                double deposit = Double.parseDouble(depositAmount);
+                String incomeSource = "其他"; // 收入来源为其他
+                Account.totalAmount += deposit; // 更新总金额
+                JOptionPane.showMessageDialog(null, "您本次存款" + depositAmount + "元，收入来源是" + incomeSource + "，账户总金额为" + Account.totalAmount + "元");
+            }
+        });
+
+
     }
 
     private void createExpensePanel() {
