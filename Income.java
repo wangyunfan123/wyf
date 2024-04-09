@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,6 +56,15 @@ public class Income extends JFrame {
 
     private void createIncomePanel() {
         incomePanel = new JPanel(new GridLayout(3, 1)); // 更改为GridLayout，3行1列
+        // 创建存款面板，存款单独一行
+        JPanel depositPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        // 添加文本和输入框到存款面板
+        JLabel depositLabel = new JLabel("存款:");
+        JTextField depositTextField = new JTextField(10);
+        depositPanel.add(depositLabel);
+        depositPanel.add(depositTextField);
+        // 将存款面板添加到收入面板
+        incomePanel.add(depositPanel);
 
         // 创建按钮面板，使得"做家务", "进步", "其他"按钮在同一行
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -71,15 +79,7 @@ public class Income extends JFrame {
         // 将按钮面板添加到收入面板
         incomePanel.add(buttonPanel);
 
-        // 创建存款面板，存款单独一行
-        JPanel depositPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        // 添加文本和输入框到存款面板
-        JLabel depositLabel = new JLabel("存款:");
-        JTextField depositTextField = new JTextField(10);
-        depositPanel.add(depositLabel);
-        depositPanel.add(depositTextField);
-        // 将存款面板添加到收入面板
-        incomePanel.add(depositPanel);
+
 
 
 
